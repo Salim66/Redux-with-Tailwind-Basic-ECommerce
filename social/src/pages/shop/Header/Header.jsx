@@ -9,9 +9,10 @@ import Shoe4 from '../../../assets/images/shoe4.png';
 import {Link} from 'react-router-dom';
 import { gsap } from "gsap";
 
+
 const Header = () => {
 
-    const [isActive, useIsActive] = useState(false);
+    const [isActive, setIsActive] = useState(false);
     const timeLine = gsap.timeline();
 
 
@@ -75,8 +76,8 @@ const Header = () => {
   return (
     <>
        <div className="header__container w-full h-screen block overflow-hidden font-raleway" >
-        <div className="bannerAdditionalBg bg-cta absolute left-0 right-0 top-0 bottom-0 h-full" ref={ useIsActive }></div>
-        <section className="home__ w-full block h-screen bg-bgColor relative" ref={ useIsActive }>
+        <div className="bannerAdditionalBg bg-cta absolute left-0 right-0 top-0 bottom-0 h-full" ref={ setIsActive }></div>
+        <section className="home__ w-full block h-screen bg-bgColor relative" ref={ setIsActive }>
             <div className="container absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 block m-auto">
 
                 <header className='header flex w-full justify-between text-white'>
@@ -217,11 +218,13 @@ const Header = () => {
                         <div className="atc"><i className="fa fa-plus-circle"></i></div>
                     </div>
             
-                </div>
+                </div>                
 
             </div>
         </section> 
        </div>
+
+        
     </>
   )
 };
