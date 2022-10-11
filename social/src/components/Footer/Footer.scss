@@ -1,0 +1,64 @@
+
+$bg-color: #132a60;
+$card-color: #2b4685;
+$white: #FFF;
+$cta: #f5393a;
+$star: #efaf05; 
+$black:#191919;
+$yellow:#ffad01;
+$blue:#31a9cc;
+$gray:#eee;
+$yt_color:#ff0000;
+
+.dFlex{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%;
+    background-color: $bg-color; 
+    
+    .container__footer {
+        padding: 70px 0 70px 0;
+        width: 85vw;
+    }
+}
+
+.footer__text{
+    .text {
+        transition: all .3s ease-in-out;
+    }
+}
+
+.important_link {
+    ul {
+        li {
+            a {
+                transition: all .3s ease-in-out;
+                &:hover{
+                    color: $cta;
+                }
+            }
+        }
+    }
+}
+
+.footer__botton {
+    p {
+        transition: all .3s ease-in-out;
+        &:hover {
+            color: $cta;
+        }
+        a {
+            transition: all .3s ease-in-out;
+            &:hover {
+                color: $cta;
+            }
+        }
+    }   
+}

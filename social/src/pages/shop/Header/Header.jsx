@@ -6,7 +6,7 @@ import Shoe1 from '../../../assets/images/shoe1.png';
 import Shoe2 from '../../../assets/images/shoe2.png';
 import Shoe3 from '../../../assets/images/shoe3.png';
 import Shoe4 from '../../../assets/images/shoe4.png';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { gsap } from "gsap";
 
 
@@ -83,14 +83,14 @@ const Header = () => {
                 <header className='header flex w-full justify-between text-white'>
 
                     <div className="logo">
-                        <a href="#"><img src={ Logo } alt="" className='max-w-full block' /></a>
+                        <Link to="/"><img src={ Logo } alt="" className='max-w-full block' /></Link>
                     </div>
 
                     <div className="menu__ flex justify-between items-center">
                         <ul className='flex justify-center items-center list-none'>
-                            <li className="active"><a href="#">Shop</a></li>
-                            <li><a href="#">Admin</a></li>
-                            <li><a href="#">Sale</a></li>
+                            <li className="active"><Link to="/shop" className='hover:text-cta hover:transition-all duration-300 hover:ease-in-out'>Shop</Link></li>
+                            <li><a href="#" className='hover:text-cta hover:transition-all duration-300 hover:ease-in-out'>Admin</a></li>
+                            <li><a href="#" className='hover:text-cta hover:transition-all duration-300 hover:ease-in-out'>Sale</a></li>
                         </ul>
             
                         <div className="myAccount flex justify-center items-center uppercase">

@@ -47,14 +47,13 @@ const Shop = () => {
         <section className="shop__section w-full font-raleway">
           <div className="product_list_container">
             <div className="container_r">
+              <h1 className='mb-14 flex justify-center text-3xl text-bgColor uppercase'>New Collections</h1>
               <div className="row row__container">
                 { productData }
               </div>
               <div className="row mt-4 pb-4">
                 <div className="col-12">
                   <div className="loader">
-                    <div className="loader__dot"></div>
-                    <div className="loader__dot"></div>
                     <div className="loader__dot"></div>
                     <div className="loader__dot"></div>
                     <div className="loader__dot"></div>
