@@ -3,6 +3,7 @@ import './ShopPage.scss';
 import product_card from '../../../product_card';
 import MiniHeader from '../../../components/MiniHeader/MiniHeader.jsx';
 import Footer from '../../../components/Footer/Footer';
+import { Link } from 'react-router-dom';
 
 const ShopPage = () => {
 
@@ -15,9 +16,9 @@ const ShopPage = () => {
         }
         return <div className='col-12 col-sm-6 col-lg-4 mb-10' key={index}>
           <div className="card">
-            <div className="card_img">
+            <Link to="/single-shop" className="card_img">
               <img src={ item.photo } alt="" />
-            </div>
+            </Link>
             <div className="card_body">
               <h2>{ item.product_name }</h2>
               <p>{ item.description }</p>

@@ -1,0 +1,124 @@
+
+$bg-color: #132a60;
+$card-color: #2b4685;
+$white: #FFF;
+$cta: #f5393a;
+$star: #efaf05; 
+$black:#191919;
+$yellow:#ffad01;
+$blue:#31a9cc;
+$gray:#eee;
+$yt_color:#ff0000;
+
+.dFlex{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product__details {
+    background-color: $gray;
+}
+
+.small__img {
+    width: 4vw;
+    img {
+        height: 5vw;
+        transition: all .3s ease-in-out;
+        padding: 3px;
+
+        &:hover {
+            padding: 4px;
+            border: 2px solid $bg-color;
+        }
+
+        &.active {
+            padding: 4px;
+            border: 2px solid $bg-color;
+        }
+    }
+}
+
+.big__img {
+    width: 400px;
+}
+
+.cta_group_d {
+    @extend .dFlex;
+    justify-content: flex-start;
+    cursor: pointer;
+    .button_atc_d {
+        @extend .dFlex;
+        width: 150px;
+        height: 40px;
+        border: 2px solid $cta;
+        border-radius: 20px;
+        margin: 20px 0;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: $cta;
+        font-weight: bold;
+        transition: all .3s ease-in-out;
+        &:hover {
+            background-color: $cta;
+            color: $white;
+        }
+    }
+}
+
+.fa-star {
+    color: gray;
+    &.colored {
+        color: $star;
+    }
+}
+
+.all__colors {
+    ul {
+        display: flex;
+        gap: 10px;
+        margin-left: 0px;
+
+        li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 40px;
+            border: 2px solid $gray;
+            border-radius: 4px;
+            transition: all .3s ease-in-out;
+            &.active,
+            &:hover {
+                border-color: $bg-color;
+            }
+        }
+    }
+}
+
+.all__sizes {
+    ul {
+        display: flex;
+        gap: 10px;
+        margin-left: 0px;
+
+        li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border: 2px solid $gray;
+            border-radius: 4px;
+            transition: all .3s ease-in-out;
+            &.active,
+            &:hover {
+                border-color: $bg-color;
+            }
+        }
+    }
+}
+
+.related__product {
+    margin-top: 90px;
+}

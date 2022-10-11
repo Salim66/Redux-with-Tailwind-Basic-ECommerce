@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../Header/Header';
 import './Shop.scss';
 import product_card from '../../../product_card';
+import { Link } from 'react-router-dom';
 
 const Shop = () => {
 
@@ -14,9 +15,9 @@ const Shop = () => {
     }
     return <div className='col-12 col-sm-6 col-lg-4 mb-10' key={index}>
       <div className="card">
-        <div className="card_img">
+        <Link to='/single-shop' className="card_img">
           <img src={ item.photo } alt="" />
-        </div>
+        </Link>
         <div className="card_body">
           <h2>{ item.product_name }</h2>
           <p>{ item.description }</p>
