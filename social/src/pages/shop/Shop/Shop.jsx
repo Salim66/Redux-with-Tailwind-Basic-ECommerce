@@ -35,6 +35,7 @@ const Shop = () => {
           </div>
         </div>
         <div className="cta_group">
+          <div className="button_atc">Quick View</div>
           <div className="button_atc">Add To Cart</div>
         </div>
       </div>
