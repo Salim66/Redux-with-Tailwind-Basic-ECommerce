@@ -10,6 +10,21 @@ import Shoe5 from '../../../assets/images/products/shoe5.webp';
 import RelatedProduct from '../../../components/RelatedProduct/RelatedProduct';
 
 const SingleShop = () => {
+
+    const handleSmallImage = (e) => {
+        // set Big Image
+        let img_url = e.target.getAttribute('src');
+        let big_img = document.getElementById("big__img");
+        big_img.setAttribute('src', img_url);
+        
+        // set active class
+        e.target.parentElement.querySelectorAll( ".active" ).forEach( e =>
+            e.classList.remove( "active" ) );
+    
+        e.target.classList.add( "active" );
+
+    }
+
   return (
     <>
         <MiniHeader />
@@ -20,21 +35,13 @@ const SingleShop = () => {
                         <div className="row">
                             <div className="col-12 col-md-6 col-lg-6 flex gap-6">
                                 <div className="left__left">
-                                    <div className="small__img">
-                                     <img src={ Shoe2 } alt="" className='active' />
-                                    </div>
-                                    <div className="small__img">
-                                     <img src={ Shoe3 } alt="" />
-                                    </div>
-                                    <div className="small__img">
-                                     <img src={ Shoe4 } alt="" />
-                                    </div>
-                                    <div className="small__img">
-                                     <img src={ Shoe5 } alt="" />
-                                    </div>
+                                     <img src={ Shoe2 } alt="" className='small__img' onClick={ handleSmallImage } />
+                                     <img src={ Shoe3 } alt="" className='small__img' onClick={ handleSmallImage } />
+                                     <img src={ Shoe4 } alt="" className='small__img' onClick={ handleSmallImage } />
+                                     <img src={ Shoe5 } alt="" className='small__img' onClick={ handleSmallImage } />
                                 </div>
                                 <div className="left__right">
-                                    <img src={ Shoe1 } alt="" className='big__img' />
+                                    <img src={ Shoe1 } alt="" className='big__img' id='big__img' />
                                 </div>
                             </div>
                             <div className="col-12 col-md-6 col-lg-6">

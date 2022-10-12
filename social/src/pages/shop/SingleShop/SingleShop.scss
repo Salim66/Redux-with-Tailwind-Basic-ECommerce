@@ -21,21 +21,19 @@ $yt_color:#ff0000;
 }
 
 .small__img {
-    width: 4vw;
-    img {
-        height: 5vw;
-        transition: all .3s ease-in-out;
-        padding: 3px;
+    width: 5vw;
+    height: 5.4vw;
+    transition: all .3s ease-in-out;
+    padding: 3px;
 
-        &:hover {
-            padding: 4px;
-            border: 2px solid $bg-color;
-        }
+    &:hover {
+        padding: 4px;
+        border: 2px solid $bg-color;
+    }
 
-        &.active {
-            padding: 4px;
-            border: 2px solid $bg-color;
-        }
+    &.active {
+        padding: 4px;
+        border: 2px solid $bg-color;
     }
 }
 
