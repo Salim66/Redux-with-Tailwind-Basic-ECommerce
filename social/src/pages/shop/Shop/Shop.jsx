@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../Header/Header';
 import './Shop.scss';
 import product_card from '../../../product_card';
 import { Link } from 'react-router-dom';
+import QuickView from '../../../components/QuickView/QuickView';
 
 const Shop = () => {
+
+  const [quickView, setQuickView] = useState(false);
+
+  const handleQuickViewModal = () => setQuickView(true);
+
 
   let productData = product_card.map((item, index) => {
     let product_price = 0;
@@ -22,21 +28,21 @@ const Shop = () => {
           <h2>{ item.product_name }</h2>
           <p>{ item.description }</p>
           <div className="price_section">
-            <span className='product_rating'>
+            <span className='product_rating product_rating_shop'>
                 <i className="fa fa-star colored"></i>
                 <i className="fa fa-star colored"></i>
                 <i className="fa fa-star colored"></i>
                 <i className="fa fa-star"></i>
                 <i className="fa fa-star"></i>
             </span>
-            <div className="price">
+            <div className="price price_shop">
               <span>{ item.currency }</span>
               <h3>{ product_price }</h3>
             </div>
           </div>
         </div>
         <div className="cta_group">
-          <div className="button_atc">Quick View</div>
+          <div className="button_atc" onClick={ handleQuickViewModal } >Quick View</div>
           <div className="button_atc">Add To Cart</div>
         </div>
       </div>
@@ -67,7 +73,7 @@ const Shop = () => {
             </div>
           </div>
         </section>
-        
+        <QuickView quickView={ quickView } setQuickView={ setQuickView } />
     </>
   )
 };

@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ShopPage.scss';
 import product_card from '../../../product_card';
 import MiniHeader from '../../../components/MiniHeader/MiniHeader.jsx';
 import Footer from '../../../components/Footer/Footer';
 import { Link } from 'react-router-dom';
+import QuickView from '../../../components/QuickView/QuickView';
 
 const ShopPage = () => {
+
+    const [quickView, setQuickView] = useState(false);
+
+    const handleQuickViewModal = () => setQuickView(true);
 
     let productData = product_card.map((item, index) => {
         let product_price = 0;
@@ -37,7 +42,7 @@ const ShopPage = () => {
               </div>
             </div>
             <div className="cta_group">
-              <div className="button_atc">Quick View</div>
+              <div className="button_atc" onClick={ handleQuickViewModal } >Quick View</div>
               <div className="button_atc">Add To Cart</div>
             </div>
           </div>
@@ -127,6 +132,7 @@ const ShopPage = () => {
             </div>
             </div>
         </section>
+        <QuickView quickView={ quickView } setQuickView={ setQuickView } />
         <Footer />
     </>
   )
