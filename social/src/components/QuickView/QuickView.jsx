@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Row, Col } from 'react-bootstrap';
 import './QuickView.scss';
 import Shoe1 from '../../assets/images/products/shoe1.webp';
@@ -6,17 +6,22 @@ import Shoe2 from '../../assets/images/products/shoe2.webp';
 import Shoe3 from '../../assets/images/products/shoe3.webp';
 import Shoe4 from '../../assets/images/products/shoe4.webp';
 import Shoe5 from '../../assets/images/products/shoe5.webp';
+import InnerImageZoom from 'react-inner-image-zoom';
 
 
 const QuickView = ({ quickView, setQuickView }) => {
 
     const handleQuickViewCloseModal = () => setQuickView(false);
 
+    const [previewImg, setPreviewImg] = useState(Shoe1);
+
     const handleSmallImage = (e) => {
         // set Big Image
+
         let img_url = e.target.getAttribute('src');
-        let big_img = document.getElementById("big__img");
-        big_img.setAttribute('src', img_url);
+        setPreviewImg(img_url);
+        // let big_img = document.getElementById("big__img");
+        // big_img.setAttribute('src', img_url);
         
         // set active class
         e.target.parentElement.querySelectorAll( ".active" ).forEach( e =>
@@ -31,7 +36,7 @@ const QuickView = ({ quickView, setQuickView }) => {
         <Modal show={quickView} onHide={ handleQuickViewCloseModal } size="lg">
             <Modal.Body>
                 <Row>
-                    <Col sm={6} md={6} lg={6} className="flex gap-6">
+                    <Col sm={6} md={6} lg={6} className="flex gap-2">
                         <div className="left__left">
                             <img src={ Shoe2 } alt="" className='small__img' onClick={ handleSmallImage } />
                             <img src={ Shoe3 } alt="" className='small__img' onClick={ handleSmallImage } />
@@ -39,7 +44,10 @@ const QuickView = ({ quickView, setQuickView }) => {
                             <img src={ Shoe5 } alt="" className='small__img' onClick={ handleSmallImage } />
                         </div>
                         <div className="left__right">
-                            <img src={ Shoe1 } alt="" className='big__img' id='big__img' />
+                            {/* <img src={ Shoe1 } alt="" className='big__img' id='big__img' /> */}
+                            <div className='big__img big__img-quick'>
+                                <InnerImageZoom zoomType={"hover"} src={ previewImg } zoomSrc={ previewImg } alt="" />
+                            </div>
                         </div>
                     </Col>
                     <Col sm={6} md={6} lg={6}>
