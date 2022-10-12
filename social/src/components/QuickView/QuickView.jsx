@@ -25,10 +25,26 @@ const QuickView = ({ quickView, setQuickView }) => {
         
         // set active class
         e.target.parentElement.querySelectorAll( ".active" ).forEach( e =>
-            e.classList.remove( "active" ) );
-    
+            e.classList.remove( "active" ) 
+        );
         e.target.classList.add( "active" );
 
+    }
+
+    // select colors to push active class
+    const handleColorSelect = (e) => {
+        e.target.parentElement.querySelectorAll( ".active" ).forEach( e =>
+            e.classList.remove( "active" ) 
+        );
+        e.target.classList.add( "active" );
+    }
+
+    // select sizes to push active class
+    const handleSizeSelect = (e) => {
+        e.target.parentElement.querySelectorAll( ".active" ).forEach( e =>
+            e.classList.remove( "active" ) 
+        );
+        e.target.classList.add( "active" );
     }
 
   return (
@@ -72,22 +88,22 @@ const QuickView = ({ quickView, setQuickView }) => {
                             <div className="all__colors my-3">
                                 <h4 className='text-base font-normal opacity-70'>Available colors</h4>
                                 <ul>
-                                    <li>Black</li>
-                                    <li className='active'>Blue</li>
-                                    <li>Bronze</li>
-                                    <li>Brown</li>
-                                    <li>Green</li>
+                                    <li onClick={ handleColorSelect }>Black</li>
+                                    <li onClick={ handleColorSelect }>Blue</li>
+                                    <li onClick={ handleColorSelect }>Bronze</li>
+                                    <li onClick={ handleColorSelect }>Brown</li>
+                                    <li onClick={ handleColorSelect }>Green</li>
                                 </ul>
                             </div>
                             <div className="all__sizes my-3">
                                 <h4 className='text-base font-normal opacity-70'>Available sizes</h4>
                                 <ul>
-                                    <li>4</li>
-                                    <li>5</li>
-                                    <li>6</li>
-                                    <li className='active'>7</li>
-                                    <li>8</li>
-                                    <li>9</li>
+                                    <li onClick={ handleSizeSelect }>5</li>
+                                    <li onClick={ handleSizeSelect }>4</li>
+                                    <li onClick={ handleSizeSelect }>6</li>
+                                    <li onClick={ handleSizeSelect }>7</li>
+                                    <li onClick={ handleSizeSelect }>8</li>
+                                    <li onClick={ handleSizeSelect }>9</li>
                                 </ul>
                             </div>
                             <div className="cta_group_d">
