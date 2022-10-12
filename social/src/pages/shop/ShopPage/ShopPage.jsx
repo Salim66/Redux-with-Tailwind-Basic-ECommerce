@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ShopPage.scss';
 import product_card from '../../../product_card';
 import MiniHeader from '../../../components/MiniHeader/MiniHeader.jsx';
@@ -9,6 +9,10 @@ import QuickView from '../../../components/QuickView/QuickView';
 const ShopPage = () => {
 
     const [quickView, setQuickView] = useState(false);
+
+    useEffect(() => {
+      window.scroll(0,0);
+    }, []);
 
     const handleQuickViewModal = () => setQuickView(true);
 

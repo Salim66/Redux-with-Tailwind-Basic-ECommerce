@@ -89,7 +89,7 @@ const Header = () => {
                     <div className="menu__ flex justify-between items-center">
                         <ul className='flex justify-center items-center list-none'>
                             <li className="active"><Link to="/shop" className='hover:text-cta hover:transition-all duration-300 hover:ease-in-out'>Shop</Link></li>
-                            <li><a href="#" className='hover:text-cta hover:transition-all duration-300 hover:ease-in-out'>Admin</a></li>
+                            <li><Link to="/dashboard" className='hover:text-cta hover:transition-all duration-300 hover:ease-in-out'>Admin</Link></li>
                             <li><a href="#" className='hover:text-cta hover:transition-all duration-300 hover:ease-in-out'>Sale</a></li>
                         </ul>
             

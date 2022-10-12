@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '../../../components/Footer/Footer';
 import MiniHeader from '../../../components/MiniHeader/MiniHeader';
 import './SingleShop.scss';
@@ -47,6 +47,10 @@ const SingleShop = () => {
         );
         e.target.classList.add( "active" );
     }
+
+    useEffect(() => {
+        window.scroll(0,0);
+    }, []);
 
   return (
     <>

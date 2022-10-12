@@ -22,7 +22,8 @@ const Footer = () => {
                     <div className="col-12 col-md-6 flex justify-end">
                         <div className="important_link">
                             <ul>
-                                <li><Link to="/">Shop</Link></li>
+                                <li><Link to="/shop">Shop</Link></li>
+                                <li><Link to="/dashboard">Admin</Link></li>
                                 <li><a href="#">Privacy Policy</a></li>
                                 <li><a href="#">Return Policy</a></li>
                                 <li><a href="#">Terms & Conditions</a></li>
