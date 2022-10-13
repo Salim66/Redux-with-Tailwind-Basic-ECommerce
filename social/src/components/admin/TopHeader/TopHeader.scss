@@ -1,0 +1,41 @@
+
+$bg-color: #132a60;
+$card-color: #2b4685;
+$white: #FFF;
+$cta: #f5393a;
+$star: #efaf05; 
+$black:#191919;
+$yellow:#ffad01;
+$blue:#31a9cc;
+$gray:#eee;
+$yt_color:#ff0000;
+
+.dFlex{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    z-index: 9999;
+    top: 0%;
+    left: 0%;
+    background-color: $card-color;
+
+    .left__header {
+        margin-left: 30px;
+    }
+
+    .right__header {
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+}

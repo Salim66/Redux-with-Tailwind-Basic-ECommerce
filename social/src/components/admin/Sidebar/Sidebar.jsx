@@ -3,6 +3,7 @@ import './Sidebar.scss';
 import { SidebarData } from './SidebarData';
 import Logo from '../../../assets/images/logo.png';
 import Admin from '../../../assets/images/users/admin.png';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
@@ -16,10 +17,10 @@ const Sidebar = () => {
                 {
                     SidebarData.map((val, key) => {
                         return (
-                            <li key={ key } onClick={ () => window.location.pathname = val.link } className="list__row" id={ window.location.pathname == val.link ? "active" : "" }>
+                            <Link to={ val.link } key={ key } className="list__row" id={ window.location.pathname == val.link ? "active" : "" }>
                                 <div className='icon'>{ val.icon }</div>
                                 <div className='title'>{ val.title }</div>
-                            </li>
+                            </Link>
                         )
                     })
                 }
