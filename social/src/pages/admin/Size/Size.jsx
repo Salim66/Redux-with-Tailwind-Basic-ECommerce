@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Sidebar from '../../../components/admin/Sidebar/Sidebar';
 import TopHeader from '../../../components/admin/TopHeader/TopHeader';
@@ -8,13 +8,28 @@ import EditSize from './EditSize/EditSize';
 import './Size.scss';
 import ViewSize from './ViewSize/ViewSize';
 import swal from 'sweetalert';
+import _ from 'lodash';
 
-
+const pageSize = 10;
 const Size = () => {
 
     const [create, setCreate] = useState(false);
     const [edit, setEdit] = useState(false);
     const [view, setView] = useState(false);
+    const [paginatedData, setPaginatedData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+
+     // get data from redux
+     const { sizes } = useSelector( state => state.size );
+
+    useEffect(() => {
+        const data = () => {
+            if(sizes){
+              setPaginatedData(_(sizes).slice(0).take(pageSize).value());
+            }
+        }
+        data();
+    }, []);
 
     // call redux dispatch
     const dispatch = useDispatch();
@@ -34,8 +49,7 @@ const Size = () => {
       dispatch(editSize(id));
     };
 
-    // get data from redux
-    const { sizes } = useSelector( state => state.size );
+   
 
     // handle status update
     const handleStatusUpdate = (e, id) => {
@@ -61,6 +75,23 @@ const Size = () => {
             swal("Your imaginary file is safe!");
           }
         });
+    }
+
+    // pagination
+    const pageSize = 10;
+    let pageCount = 0;
+    if(sizes.length > 0){
+      pageCount = Math.ceil(sizes.length/pageSize)+1;
+    }else {
+      pageCount = 0;
+    }
+    if(pageCount === 1) return null;
+    const pages = _.range(1, pageCount +1);
+    const pagination = (pageNo) => {
+      setCurrentPage(pageNo);
+      const startIndex = (pageNo - 1) * pageSize;
+      const paginatedData = _(sizes).slice(startIndex).take(pageSize).value();
+      setPaginatedData(paginatedData);
     }
 
   return (
@@ -89,7 +120,7 @@ const Size = () => {
                         </thead>
                         <tbody>
                           {
-                            sizes.map((data, key) => {
+                            paginatedData.map((data, key) => {
                               let state_status = data.status? "checked" : "";
                               return (
                                 <tr>
@@ -112,6 +143,17 @@ const Size = () => {
                           }
                         </tbody>
                     </table>
+                    {/* <nav className='d-flex justify-end'>
+                      <ul className="pagination">
+                        {
+                          pages && pages.map((page) => (
+                            <li className={ page === currentPage ? "page-item active" : "page-item" }>
+                              <p className='page-link' onClick={ () => pagination(page) }>{ page }</p>
+                            </li>
+                          ))
+                        }
+                      </ul>
+                    </nav> */}
                   </div>
                 </div>
               </div>
