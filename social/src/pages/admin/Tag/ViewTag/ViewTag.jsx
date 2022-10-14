@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import './ViewTag.scss';
 
@@ -6,6 +7,9 @@ const ViewTag = ({ view, setView }) => {
 
     // view brand close
     const handleViewClose = () => setView(false);
+
+    // get single tag form redux
+    const { single_tag } = useSelector( state => state.tag );
 
   return (
     <>
@@ -24,7 +28,18 @@ const ViewTag = ({ view, setView }) => {
                     <tbody>
                         <tr>
                             <td>Name</td>
-                            <td>T-Shirt</td>
+                            <td>{ single_tag.name }</td>
+                        </tr>
+                        <tr>
+                            <td>Slug</td>
+                            <td>{ single_tag.slug }</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            {
+                                single_tag.status ? <td>True</td> : <td>False</td>
+                            }
+                            
                         </tr>
                     </tbody>
                 </table>

@@ -29,7 +29,7 @@ const Size = () => {
             }
         }
         data();
-    }, []);
+    }, [sizes]);
 
     // call redux dispatch
     const dispatch = useDispatch();
@@ -143,7 +143,7 @@ const Size = () => {
                           }
                         </tbody>
                     </table>
-                    {/* <nav className='d-flex justify-end'>
+                    <nav className='d-flex justify-end'>
                       <ul className="pagination">
                         {
                           pages && pages.map((page) => (
@@ -153,7 +153,7 @@ const Size = () => {
                           ))
                         }
                       </ul>
-                    </nav> */}
+                    </nav>
                   </div>
                 </div>
               </div>

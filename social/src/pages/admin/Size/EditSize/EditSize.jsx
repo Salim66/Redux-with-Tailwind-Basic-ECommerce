@@ -72,7 +72,7 @@ const EditSize = ({ edit, setEdit }) => {
                 <Modal.Title>Edit size</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form onSubmit={ handleFormSubmit }>
+                <form onSubmit={ handleFormSubmit } >
                     <div className="row">
                         <div className="col-12 col-md-12 col-lg-12">
                             <div className="my-2">

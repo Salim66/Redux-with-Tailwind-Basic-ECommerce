@@ -13,6 +13,8 @@ import ShopPage from './pages/shop/ShopPage/ShopPage';
 import SingleShop from './pages/shop/SingleShop/SingleShop';
 import { useDispatch } from 'react-redux';
 import { getAllSize } from './redux/size/action';
+import { getAllColor } from './redux/color/action';
+import { getAllTag } from './redux/tag/action';
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllSize());
+    dispatch(getAllColor());
+    dispatch(getAllTag());
   },[]);
 
   return (

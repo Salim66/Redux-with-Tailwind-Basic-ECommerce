@@ -10,7 +10,6 @@ const ViewSize = ({ view, setView }) => {
 
     // get single size form redux
     const { single_size } = useSelector( state => state.size );
-    console.log(single_size);
 
   return (
     <>

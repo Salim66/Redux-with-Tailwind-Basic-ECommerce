@@ -7,6 +7,8 @@ import errorHandler from './middleware/errorHandler.js';
 import cookieParser from 'cookie-parser';
 import sizeRouter from './routes/sizeRoute.js';
 import cors from 'cors';
+import colorRouter from './routes/colorRoute.js';
+import tagRouter from './routes/tagRoute.js';
 
 
 // initalize express
@@ -24,8 +26,10 @@ app.use(cors());
 const PORT = process.env.SERVER_PORT || 5000;
 
 // Routes
-app.use('/api/v1/size', sizeRouter)
-app.use('/api/user', userRouter)
+app.use('/api/v1/tag', tagRouter);
+app.use('/api/v1/color', colorRouter);
+app.use('/api/v1/size', sizeRouter);
+app.use('/api/user', userRouter);
 
 
 // Custom error handler middleware
