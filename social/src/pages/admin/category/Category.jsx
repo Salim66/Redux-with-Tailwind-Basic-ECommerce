@@ -109,7 +109,7 @@ const Category = () => {
                 <div className="card_d bg-white shadow-md py-4 px-5 rounded-md">
                   <div className="card-body">
                     <button type='button' className='bg-sky-400 px-3 py-2 text-white rounded-md hover:bg-sky-500' onClick={ handleCategoryCreate }>Add New Category</button>
-                    <table className='table table-striped mt-2'>
+                    <table className='table table-striped mt-2 table-responsive-md'>
                         <thead className='table-dark'>
                             <tr>
                                 <th>#</th>
