@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Modal, CloseButton } from 'react-bootstrap';
 import './ViewBrand.scss';
 
@@ -6,6 +7,9 @@ const ViewBrand = ({ view, setView }) => {
 
     // view brand close
     const handleViewClose = () => setView(false);
+
+    // get single brand form redux
+    const { single_brand } = useSelector( state => state.brand );
 
   return (
     <>
@@ -24,7 +28,22 @@ const ViewBrand = ({ view, setView }) => {
                     <tbody>
                         <tr>
                             <td>Name</td>
-                            <td>T-Shirt</td>
+                            <td>{ single_brand.name }</td>
+                        </tr>
+                        <tr>
+                            <td>Slug</td>
+                            <td>{ single_brand.slug }</td>
+                        </tr>
+                        <tr>
+                            <td>Image</td>
+                            <td><img src={ `http://localhost:5050/images/brands/${ single_brand.image }` } alt="" /></td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            {
+                                single_brand.status ? <td>True</td> : <td>False</td>
+                            }
+                            
                         </tr>
                     </tbody>
                 </table>

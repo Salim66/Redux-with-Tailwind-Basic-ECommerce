@@ -9,6 +9,7 @@ import sizeRouter from './routes/sizeRoute.js';
 import cors from 'cors';
 import colorRouter from './routes/colorRoute.js';
 import tagRouter from './routes/tagRoute.js';
+import brandRouter from './routes/brandRoute.js';
 
 
 // initalize express
@@ -22,10 +23,13 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser());
 app.use(cors());
 
+app.use(express.static('api/public'));
+
 // initialize environmet 
 const PORT = process.env.SERVER_PORT || 5000;
 
 // Routes
+app.use('/api/v1/brand', brandRouter);
 app.use('/api/v1/tag', tagRouter);
 app.use('/api/v1/color', colorRouter);
 app.use('/api/v1/size', sizeRouter);

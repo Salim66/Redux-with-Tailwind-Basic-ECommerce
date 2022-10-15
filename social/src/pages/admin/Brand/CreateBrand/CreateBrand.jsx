@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import './CreateBrand.scss';
+import swal from 'sweetalert';
+import { createBrand } from '../../../../redux/brand/action';
 
 const CreateBrand = ({ create, setCreate }) => {
+
+    // form input state
+    const [input, setInput] = useState({
+        name: '',
+        image: '',
+        file: ''
+    });
+
+    // call dispatch
+    const dispatch = useDispatch();
+
+    // form input change 
+    const handleInput = (e) => {
+        setInput((prev) => ({ ...prev, [e.target.name] : e.target.value }));
+    }
 
     const handleBrandCreateClose = () => setCreate(false);
 
@@ -11,6 +29,46 @@ const CreateBrand = ({ create, setCreate }) => {
         const image_url = URL.createObjectURL(e.target.files[0]);
         const previewImage = document.getElementById('imagePreview');
         previewImage.setAttribute('src', image_url);
+
+        setInput((prev) => ({
+            ...prev,
+            file: e.target.files[0]
+        }))
+    }
+
+    // create brand
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+
+        const data = new FormData();
+        data.append('name', input.name);
+        data.append('image', input.file);
+
+        try {
+
+            if(input.name){
+
+                dispatch(createBrand(data));
+
+                setCreate(false);
+
+                swal({
+                    title: "Good job!",
+                    text: "Brand added successfully",
+                    icon: "success"
+                });
+
+                setInput({
+                    name: '',
+                    image: '',
+                })
+
+            }
+            
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
   return (
@@ -20,12 +78,12 @@ const CreateBrand = ({ create, setCreate }) => {
                 <Modal.Title>Create new brand</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form action="#">
+                <form onSubmit={ handleFormSubmit } method="POST" encType='multipart/form-data' >
                     <div className="row">
                         <div className="col-12 col-md-12 col-lg-12">
                             <div className="my-2">
                                 <label htmlFor="">Brand Name <span className='text-red-500 text-xl'>*</span></label>
-                                <input type="text" name='name' className='form-control' />
+                                <input type="text" name='name' className='form-control' value={ input.name } onChange={ handleInput } />
                             </div>
                         </div>
                         <div className="col-12 col-md-12 col-lg-12">
