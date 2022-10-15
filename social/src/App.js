@@ -15,6 +15,8 @@ import { useDispatch } from 'react-redux';
 import { getAllSize } from './redux/size/action';
 import { getAllColor } from './redux/color/action';
 import { getAllTag } from './redux/tag/action';
+import { getAllBrand } from './redux/brand/action';
+import { getAllCategory } from './redux/category/action';
 
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
     dispatch(getAllSize());
     dispatch(getAllColor());
     dispatch(getAllTag());
+    dispatch(getAllBrand());
+    dispatch(getAllCategory());
   },[]);
 
   return (

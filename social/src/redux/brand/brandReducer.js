@@ -1,5 +1,5 @@
 import { BRAND_FAIL, BRAND_REQUEST, BRAND_SUCCESS, DELETE_BRAND, EDIT_BRAND, SINGLE_BRAND } from "./actionType"
-import initialBrand from "./initailSize"
+import initialBrand from "./initailBrand"
 
 
 // create brand reducer

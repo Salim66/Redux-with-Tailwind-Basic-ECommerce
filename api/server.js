@@ -10,6 +10,7 @@ import cors from 'cors';
 import colorRouter from './routes/colorRoute.js';
 import tagRouter from './routes/tagRoute.js';
 import brandRouter from './routes/brandRoute.js';
+import categoryRouter from './routes/categoryRoute.js';
 
 
 // initalize express
@@ -29,6 +30,7 @@ app.use(express.static('api/public'));
 const PORT = process.env.SERVER_PORT || 5000;
 
 // Routes
+app.use('/api/v1/category', categoryRouter);
 app.use('/api/v1/brand', brandRouter);
 app.use('/api/v1/tag', tagRouter);
 app.use('/api/v1/color', colorRouter);

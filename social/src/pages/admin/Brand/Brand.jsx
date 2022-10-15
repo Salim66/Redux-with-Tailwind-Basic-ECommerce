@@ -20,8 +20,8 @@ const Brand = () => {
     const [paginatedData, setPaginatedData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
-     // get data from redux
-     const { brands } = useSelector( state => state.brand );
+    // get data from redux
+    const { brands } = useSelector( state => state.brand );
 
     useEffect(() => {
         const data = () => {

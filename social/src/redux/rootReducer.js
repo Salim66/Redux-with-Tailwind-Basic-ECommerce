@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import brandReducer from "./brand/brandReducer";
+import categoryReducer from "./category/categoryReducer";
 import colorReducer from "./color/colorReducer";
 import sizeReducer from "./size/sizeReducer";
 import tagReducer from "./tag/tagReducer";
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
     color: colorReducer,
     tag: tagReducer,
     brand: brandReducer,
+    category: categoryReducer,
 });
 
 // export default
