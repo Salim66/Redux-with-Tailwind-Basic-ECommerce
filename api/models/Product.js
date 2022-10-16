@@ -72,6 +72,10 @@ const productSchema = mongoose.Schema({
 });
 
 
+// static method
+productSchema.statics.findCategory = function(id){
+    return this.findById(id).select(['name', 'categories']).populate('categories');
+}
 
 // export student schema
 export default mongoose.model('Product', productSchema);

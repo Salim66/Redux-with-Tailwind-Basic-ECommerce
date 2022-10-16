@@ -63,10 +63,16 @@ export const createProduct = (data) => async (dispatch) => {
 // single product view
 export const singleProduct = (id) => async (dispatch) => {
 
-    dispatch({
-        type: SINGLE_PRODUCT,
-        payload: id
+    await axios.get(`http://localhost:5050/api/v1/product/${id}`)
+    .then(res => {
+        dispatch({
+            type: SINGLE_PRODUCT,
+            payload: res.data
+        });
     })
+    .catch(error => {
+        dispatch(productFail(error.message));
+    });
 
 }
 

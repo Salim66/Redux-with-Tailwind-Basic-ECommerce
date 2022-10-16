@@ -72,7 +72,7 @@ export const getSingleProduct = async (req, res, next) => {
         
         let { id } = req.params;
 
-        const product = await Product.findById(id);
+        const product = await Product.findById(id).populate(['categories', 'brands', 'tags', 'colors', 'sizes']);
 
         if(product){
             res.status(200).json(product);

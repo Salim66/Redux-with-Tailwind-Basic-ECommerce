@@ -17,6 +17,7 @@ import { getAllColor } from './redux/color/action';
 import { getAllTag } from './redux/tag/action';
 import { getAllBrand } from './redux/brand/action';
 import { getAllCategory } from './redux/category/action';
+import { getAllProduct } from './redux/product/action';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
     dispatch(getAllTag());
     dispatch(getAllBrand());
     dispatch(getAllCategory());
+    dispatch(getAllProduct());
   },[]);
 
   return (

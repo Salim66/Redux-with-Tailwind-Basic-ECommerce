@@ -31,7 +31,7 @@ const productReducer = ( state = initialProduct, { type, payload } ) => {
             return {
                 ...state,
                 skeleton: false,
-                single_product: state.products.find( data => data._id === payload )
+                single_product: payload
             }
 
         case DELETE_PRODUCT:
