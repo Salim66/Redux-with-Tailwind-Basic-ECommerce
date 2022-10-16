@@ -5,8 +5,9 @@ import './CreateProduct.scss';
 import swal from 'sweetalert';
 import { createProduct } from '../../../../redux/product/action';
 import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
-const animatedComponents = makeAnimated();
+import Editor from 'ckeditor5-custom-build/build/ckeditor';
+// import {Editor as ClassicEditor} from 'ckeditor5-custom-build/build/ckeditor';
+import { CKEditor } from '@ckeditor/ckeditor5-react'
 
 const CreateProduct = ({ create, setCreate }) => {
 
@@ -111,20 +112,22 @@ const CreateProduct = ({ create, setCreate }) => {
 
     }
 
-    const hangleColorSelect = (item) => {
-        let colors = input.colors;
-        item.map((color) => {
-            if(colors.includes(color.value)){
-                colors.pop(color.value);
-                console.log(color.value);
-            }else {
-                colors.push(color.value);
-            }
-        })
-        setInput((prevState) => ({
-            ...prevState,
-            colors: colors
-        }))
+    const handlePopularProduct = (e) => {
+
+        if(e.target.checked) {
+            let popular_product = input.popular_product;
+            setInput((prevState) => ({
+                ...prevState,
+                popular_product: true
+            }))
+        }else {
+            let popular_product = input.popular_product;
+            setInput((prevState) => ({
+                ...prevState,
+                popular_product: false
+            }))
+        }
+
     }
 
     // create product
@@ -146,6 +149,12 @@ const CreateProduct = ({ create, setCreate }) => {
         }
         for(let i = 0; i < input.tags.length; i++){
             data.append('tags', input.tags[i]);
+        }
+        for(let i = 0; i < input.sizes.length; i++){
+            data.append('sizes', input.sizes[i]);
+        }
+        for(let i = 0; i < input.colors.length; i++){
+            data.append('colors', input.colors[i]);
         }
         data.append('short_desc', input.short_desc);
         data.append('long_desc', input.long_desc);
@@ -252,7 +261,6 @@ const CreateProduct = ({ create, setCreate }) => {
                                 <Select 
                                     onChange={ (item) => setInput({ ...input, colors: item.map(i => i.value)}) }
                                     isMulti 
-                                    components={animatedComponents}
                                     options={
                                      colors.map((color, key) => (
                                         { value: color._id, label: color.name }
@@ -265,8 +273,7 @@ const CreateProduct = ({ create, setCreate }) => {
                                 <label htmlFor="">Sizes</label>
                                 <Select 
                                     onChange={ (item) => setInput({ ...input, sizes: item.map(i => i.value)}) }
-                                    isMulti 
-                                    components={animatedComponents}
+                                    isMulti
                                     options={
                                      sizes.map((size, key) => (
                                         { value: size._id, label: size.name }
@@ -320,6 +327,49 @@ const CreateProduct = ({ create, setCreate }) => {
                                     </>
                                     ))
                                 }
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-12 col-lg-12">
+                            <div className="my-2">
+                                <label htmlFor="">Short Description </label>
+                                <textarea name="short_desc" className='form-control' rows="2" onChange={ handleInput }></textarea>
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-12 col-lg-12">
+                            <div className="my-2">
+                                <label htmlFor="">Long Description </label>
+                                <CKEditor
+                                    editor={Editor}
+                                    onReady={editor => {
+                                        // You can store the "editor" and use when it is needed.
+                                        console.log('Editor is ready to use!', editor);
+                                    }}
+                                    onChange={(event, editor) => {
+                                        const data = editor.getData();
+                                        setInput({ ...input, long_desc: data });
+                                    }}
+                                    onBlur={(event, editor) => {
+                                        console.log('Blur.', editor);
+                                    }}
+                                    onFocus={(event, editor) => {
+                                        console.log('Focus.', editor);
+                                    }}
+
+                                    row="10"
+                                />
+                            </div>
+                        </div>
+                        <hr />
+                        <div className="col-12 col-md-4 col-lg-4">
+                            <div className="my-2">
+                                <label>
+                                    <input type="checkbox" name='popular_product' onChange={ handlePopularProduct } /> Popular Product
+                                </label>
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-12 col-lg-12">
+                            <div className="mt-4 mb-2">
+                                <input type="submit" className='py-2 px-3 rounded-md text-white bg-green-400 hover:bg-green-500' value='Add new' />
                             </div>
                         </div>
                     </div>
