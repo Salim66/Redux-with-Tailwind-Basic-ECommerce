@@ -37,6 +37,11 @@ const __dirname = resolve();
 0 */
 export const createProduct = async (req, res, next) => {
 
+    let gallery_image = [];
+    for(let i = 0; i < req.files.gallery_image.length; i++){
+        gallery_image.push(req.files.gallery_image[i].filename);
+    }
+
     try {
 
         const slug = convertToSlug(req.body.name);
@@ -44,7 +49,8 @@ export const createProduct = async (req, res, next) => {
         const product = await Product.create({ 
             ...req.body, 
             slug,
-            featured_image: req.file.filename, 
+            featured_image: req.files.featured_image[0].filename, 
+            gallery_image
         });
 
         if(product){

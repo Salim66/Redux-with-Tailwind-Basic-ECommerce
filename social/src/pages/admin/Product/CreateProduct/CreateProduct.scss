@@ -1,3 +1,18 @@
+$bg-color: #132a60;
+$white: #FFF;
+$cta: #f5393a;
+$star: #efaf05; 
+
 .modal {
     z-index: 99999;
+}
+
+.container_g {
+    padding: 40px;
+    border: 2px dotted gray;
+    text-align: center;
+    transition: all .3s ease-in-out;
+    &:hover {
+        border-color: $bg-color;
+    }
 }

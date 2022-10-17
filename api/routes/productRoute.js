@@ -21,7 +21,16 @@ const storage = multer.diskStorage({
 
 const productMulter = multer({
     storage
-}).single('featured_image');
+}).fields([
+    {
+        name: 'featured_image',
+        maxCount: 1
+    },
+    {
+        name: 'gallery_image',
+        maxCount: 8
+    }
+]);
 
 // route
 router.route('/').get(getAllProduct).post(productMulter, createProduct);

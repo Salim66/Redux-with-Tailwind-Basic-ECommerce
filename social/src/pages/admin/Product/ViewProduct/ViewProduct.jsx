@@ -11,7 +11,7 @@ const ViewProduct = ({ view, setView }) => {
 
     // get single product form redux
     const { single_product } = useSelector( state => state.product );
-    console.log(single_product);
+    // console.log(single_product);
   return (
     <>
         <Modal show={ view } onHide={ handleViewClose } size="lg">
@@ -104,6 +104,16 @@ const ViewProduct = ({ view, setView }) => {
                         <tr>
                             <td>Featured Image</td>
                             <td><img src={ `http://localhost:5050/images/products/${ single_product.featured_image }` } alt="" /></td>
+                        </tr>
+                        <tr>
+                            <td>Gallery Image</td>
+                            <td className='flex gap-3'>
+                                {
+                                    single_product.gallery_image && single_product.gallery_image.map((gall, s) => (
+                                        <img src={ `http://localhost:5050/images/products/${ gall }` } alt="" />
+                                    )) 
+                                }
+                            </td>
                         </tr>
                         <tr>
                             <td>Short Description</td>

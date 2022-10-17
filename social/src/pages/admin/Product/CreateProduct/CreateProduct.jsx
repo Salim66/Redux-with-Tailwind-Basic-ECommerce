@@ -8,6 +8,7 @@ import Select from 'react-select';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 // import {Editor as ClassicEditor} from 'ckeditor5-custom-build/build/ckeditor';
 import { CKEditor } from '@ckeditor/ckeditor5-react'
+import {useDropzone} from 'react-dropzone'
 
 const CreateProduct = ({ create, setCreate }) => {
 
@@ -20,6 +21,8 @@ const CreateProduct = ({ create, setCreate }) => {
         rating: '',
         featured_image: '',
         file: '',
+        gallery_image: '',
+        gall: '',
         categories: [],
         brands: [],
         tags: [],
@@ -130,6 +133,34 @@ const CreateProduct = ({ create, setCreate }) => {
 
     }
 
+    // get data form redux
+    const { categories } = useSelector( state => state.category );
+    const { brands } = useSelector( state => state.brand );
+    const { tags } = useSelector( state => state.tag );
+    const { sizes } = useSelector( state => state.size );
+    const { colors } = useSelector( state => state.color );
+
+    // dropZone 
+    const [files,setFiles] = useState([])
+    const {getRootProps, getInputProps} = useDropzone({
+        accept:"image/*",
+        onDrop:(acceptedFiles) => {
+          setFiles(
+            acceptedFiles.map(file => Object.assign(file,{
+              preview:URL.createObjectURL(file)
+            }))
+          )
+          setInput((prevState) => ({
+              ...prevState,
+              gall: acceptedFiles
+          }))          
+        }
+    })
+    
+    const images = files.map(file => (
+        <img key={file.name} src={file.preview} alt="image" style={{width:'60px',height:'60px'}} />
+    ))
+
     // create product
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -141,6 +172,9 @@ const CreateProduct = ({ create, setCreate }) => {
         data.append('stock', input.stock);
         data.append('rating', input.rating);
         data.append('featured_image', input.file);
+        for(let i = 0; i < input.gall.length; i++){
+            data.append('gallery_image', input.gall[i]);
+        }
         for(let i = 0; i < input.categories.length; i++){
             data.append('categories', input.categories[i]);
         }
@@ -162,7 +196,7 @@ const CreateProduct = ({ create, setCreate }) => {
 
         try {
 
-            if(input.name){
+            if(input.name && input.regular_price){
 
                 dispatch(createProduct(data));
 
@@ -182,6 +216,8 @@ const CreateProduct = ({ create, setCreate }) => {
                     rating: '',
                     featured_image: '',
                     file: '',
+                    gallery_image: '',
+                    gall: '',
                     categories: [],
                     brands: [],
                     tags: [],
@@ -192,6 +228,10 @@ const CreateProduct = ({ create, setCreate }) => {
                     popular_product: false
                 })
 
+                setFiles([]);
+
+                e.target.reset();
+
             }
             
         } catch (error) {
@@ -199,13 +239,6 @@ const CreateProduct = ({ create, setCreate }) => {
         }
 
     }
-
-    const { categories } = useSelector( state => state.category );
-    const { brands } = useSelector( state => state.brand );
-    const { tags } = useSelector( state => state.tag );
-    const { sizes } = useSelector( state => state.size );
-    const { colors } = useSelector( state => state.color );
-
 
   return (
     <>
@@ -253,6 +286,24 @@ const CreateProduct = ({ create, setCreate }) => {
                             </div>
                             <div className="w-1/4 h-1/4">
                                 <img id='imagePreview' src="" alt="" className='mb-2' />
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-6 col-lg-6">
+                            <div className="my-2">
+                                <section className="container_g hover:shadow-lg hover:bg-gray-200">
+                                    <div {...getRootProps({className: 'dropzone'})}>
+                                        <input {...getInputProps()} />
+                                        <span className="text-center block">Gallery Image</span>
+                                        <p>Drag 'n' drop some files here, or click to select files</p>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-6 col-lg-6">
+                            <div className="my-2">
+                                <div className="flex gap-1 flex-wrap">
+                                { images }
+                                </div>
                             </div>
                         </div>
                         <div className="col-12 col-md-6 col-lg-6">
