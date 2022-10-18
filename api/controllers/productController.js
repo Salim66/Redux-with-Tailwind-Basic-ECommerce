@@ -256,6 +256,30 @@ export const deleteProduct = async (req, res, next) => {
 
 /**
  * @access private
+ * @route api/product/status
+ * @method GET
+ */
+ export const getAllStatusProduct = async (req, res, next) => {
+    
+    try {
+        
+        const products = await Product.find().where('status', true).sort({ _id: 'desc'}).limit(27);
+
+        if(products){
+            res.status(200).json(products);
+        }else {
+            next(createError(401, "Something want wrong!"))
+        }
+        
+
+    } catch (error) {
+        next(error);
+    }
+
+}
+
+/**
+ * @access private
  * @route api/product/product-search-slug/slug
  * @method GET
  */

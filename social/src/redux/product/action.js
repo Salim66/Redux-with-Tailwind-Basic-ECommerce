@@ -1,6 +1,6 @@
 import axios from "axios";
 import cogoToast from 'cogo-toast';
-import { DELETE_PRODUCT, EDIT_PRODUCT, NEW_PRODUCT, POPULAR_PRODUCT, PRODUCT_FAIL, PRODUCT_REQUEST, PRODUCT_SUCCESS, SINGLE_PRODUCT } from "./actionType";
+import { DELETE_PRODUCT, EDIT_PRODUCT, NEW_PRODUCT, POPULAR_PRODUCT, PRODUCT_FAIL, PRODUCT_REQUEST, PRODUCT_SUCCESS, SINGLE_PRODUCT, STATUS_PRODUCT } from "./actionType";
 
 
 // PRODUCT  REQUEST
@@ -182,6 +182,29 @@ export const getAllNewProduct = () => async (dispatch) => {
         .then(res => {
             dispatch({
                 type: NEW_PRODUCT,
+                payload: res.data
+            });;
+        })
+        .catch(error => {
+            dispatch(productFail(error.message));
+        });
+        
+    } catch (error) {
+        dispatch(productFail(error.message));
+    }
+
+}
+
+// get all status product 
+export const getAllStatusProduct = () => async (dispatch) => {
+
+    try {
+
+        dispatch(productRequest());
+        await axios.get('http://localhost:5050/api/v1/product/status')
+        .then(res => {
+            dispatch({
+                type: STATUS_PRODUCT,
                 payload: res.data
             });;
         })

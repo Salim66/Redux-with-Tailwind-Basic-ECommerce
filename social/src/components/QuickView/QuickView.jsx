@@ -117,7 +117,7 @@ const QuickView = ({ quickView, setQuickView }) => {
                             </div>
                             <div className="all__colors my-3">
                                 <h4 className='text-base font-normal opacity-70'>Available colors</h4>
-                                <ul>
+                                <ul className='flex-wrap'>
                                     {/* <li onClick={ handleColorSelect }>Black</li>
                                     <li onClick={ handleColorSelect }>Blue</li>
                                     <li onClick={ handleColorSelect }>Bronze</li>
@@ -132,7 +132,7 @@ const QuickView = ({ quickView, setQuickView }) => {
                             </div>
                             <div className="all__sizes my-3">
                                 <h4 className='text-base font-normal opacity-70'>Available sizes</h4>
-                                <ul>
+                                <ul className='flex-wrap'>
                                     {/* <li onClick={ handleSizeSelect }>5</li>
                                     <li onClick={ handleSizeSelect }>4</li>
                                     <li onClick={ handleSizeSelect }>6</li>

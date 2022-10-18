@@ -9,6 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 

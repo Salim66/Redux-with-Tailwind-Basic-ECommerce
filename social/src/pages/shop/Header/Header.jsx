@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { gsap } from "gsap";
 import { useSelector } from 'react-redux';
 import parse from 'html-react-parser';
+import Popular_skeleton from '../../../components/Placeholder/Popular_skeleton';
 
 const Header = () => {
 
@@ -17,7 +18,7 @@ const Header = () => {
     const timeLine = gsap.timeline();
 
     // get pupular product
-    const { popular_products } = useSelector(state => state.product);
+    const { popular_products, skeleton } = useSelector(state => state.product);
 
     useEffect(() => {
 
@@ -124,6 +125,11 @@ const Header = () => {
                 </div>
 
                 <div className="slider__item flex items-center justify-between">
+
+                    {
+                        
+                        skeleton && <Popular_skeleton />
+                    }
 
                     {
                         popular_products.map((data, key) => {

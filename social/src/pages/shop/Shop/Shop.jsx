@@ -7,6 +7,8 @@ import QuickView from '../../../components/QuickView/QuickView';
 import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 import { singleProduct } from '../../../redux/product/action';
+import New_skeleton from '../../../components/Placeholder/New_skeleton';
+
 
 const Shop = () => {
 
@@ -21,7 +23,7 @@ const Shop = () => {
   };
 
   // get data form redux
-  const { new_products } = useSelector( state => state.product );
+  const { new_products, skeleton } = useSelector( state => state.product );
 
   let productData = new_products.map((item, index) => {
     let product_price = 0;
@@ -69,7 +71,7 @@ const Shop = () => {
         </div>
       </div>
     </div>
- });
+  });
 
   return (
     <>
@@ -78,6 +80,9 @@ const Shop = () => {
             <div className="container_r">
               <h1 className='mb-14 flex justify-center text-3xl text-bgColor uppercase'>New Collections</h1>
               <div className="row row__container">
+                {
+                  skeleton && <New_skeleton />
+                }
                 { productData }
               </div>
               <div className="row mt-4 pb-4">
