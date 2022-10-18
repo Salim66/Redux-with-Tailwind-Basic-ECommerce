@@ -8,14 +8,16 @@ import Shoe3 from '../../../assets/images/shoe3.png';
 import Shoe4 from '../../../assets/images/shoe4.png';
 import { Link } from 'react-router-dom';
 import { gsap } from "gsap";
-
+import { useSelector } from 'react-redux';
+import parse from 'html-react-parser';
 
 const Header = () => {
 
     const [isActive, setIsActive] = useState(false);
     const timeLine = gsap.timeline();
 
-
+    // get pupular product
+    const { popular_products } = useSelector(state => state.product);
 
     useEffect(() => {
 
@@ -123,100 +125,46 @@ const Header = () => {
 
                 <div className="slider__item flex items-center justify-between">
 
-                    <div className="slider__">
-                        <div className="small__product">
-                            <img src={ Shoe3 } />
-                        </div>
-                        <div className="product__details__">
-                            <h3>Nike pegasus 37</h3>
-                            <p>Running collections</p>
-                            <span>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                            </span>
-                            <h2><small className='line-through text-red-500'>$200</small> $150</h2>
-                        </div>
-                        <div className="atc"><i className="fa fa-plus-circle"></i></div>
-                    </div>
+                    {
+                        popular_products.map((data, key) => {
+                            let price = '';
+                            if(data.sale_price){
+                                price = <h2><small className='line-through text-red-500'>${ data.regular_price }</small> ${ data.sale_price }</h2>
+                            }else {
+                                price = <h2>${ data.regular_price }</h2>
+                            }
 
-                    <div className="slider__">
-                        <div className="small__product">
-                            <img src={ Shoe1 } />
-                        </div>
-                        <div className="product__details__">
-                            <h3>Nike pegasus 37</h3>
-                            <p>Running collections</p>
-                            <span>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                            </span>
-                            <h2>$150</h2>
-                        </div>
-                        <div className="atc"><i className="fa fa-plus-circle"></i></div>
-                    </div>
-            
-                    <div className="slider__">
-                        <div className="small__product">
-                            <img src={ Shoe2 } />
-                        </div>
-                        <div className="product__details__">
-                            <h3>Nike pegasus 37</h3>
-                            <p>Running collections</p>
-                            <span>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                            </span>
-                            <h2>$150</h2>
-                        </div>
-                        <div className="atc"><i className="fa fa-plus-circle"></i></div>
-                    </div>
-            
-                    <div className="slider__">
-                        <div className="small__product">
-                            <img src={ Shoe3 } />
-                        </div>
-                        <div className="product__details__">
-                            <h3>Nike pegasus 37</h3>
-                            <p>Running collections</p>
-                            <span>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                            </span>
-                            <h2>$150</h2>
-                        </div>
-                        <div className="atc"><i className="fa fa-plus-circle"></i></div>
-                    </div>
-            
-                    <div className="slider__">
-                        <div className="small__product">
-                            <img src={ Shoe4 } />
-                        </div>
-                        <div className="product__details__">
-                            <h3>Nike pegasus 37</h3>
-                            <p>Running collections</p>
-                            <span>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star colored"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                            </span>
-                            <h2>$150</h2>
-                        </div>
-                        <div className="atc"><i className="fa fa-plus-circle"></i></div>
-                    </div>
+                            let rating = '';
+                            for(let i=0; i<5; i++){
+                                if(i<data.rating){
+                                    rating += '<i className="fa fa-star colored"></i>'
+                                }else {
+                                    rating += '<i className="fa fa-star"></i>'
+                                }
+                            }
+                  
+                            return <Link to={`/single-shop/${data.slug}`} key={key} className="slider__">
+                                        <div className="small__product">
+                                            <img src={ `http://localhost:5050/images/products/${ data.featured_image }` } />
+                                        </div>
+                                        <div className="product__details__">
+                                            <h3>{ data.name.substring(0, 13) }...</h3>
+                                            <p>{ data.short_desc.substring(0, 15) }...</p>
+                                            <span>
+                                                {/* <i className="fa fa-star colored"></i>
+                                                <i className="fa fa-star colored"></i>
+                                                <i className="fa fa-star colored"></i>
+                                                <i className="fa fa-star"></i>
+                                                <i className="fa fa-star"></i> */}
+                                                { parse(rating) }
+                                            </span>
+                                            { price }
+                                        </div>
+                                        <div className="atc"><i className="fa fa-plus-circle"></i></div>
+                                    </Link>
+                        })
+                    }
+                    
             
                 </div>                
 

@@ -9,8 +9,22 @@ import Shoe4 from '../../../assets/images/products/shoe4.webp';
 import Shoe5 from '../../../assets/images/products/shoe5.webp';
 import RelatedProduct from '../../../components/RelatedProduct/RelatedProduct';
 import InnerImageZoom from 'react-inner-image-zoom';
+import {  useDispatch } from 'react-redux';
+import { SLUG_PRODUCT } from '../../../redux/product/actionType';
+import { productFail, productRequest } from '../../../redux/product/action';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import parse from 'html-react-parser';
 
 const SingleShop = () => {
+
+    // use state
+    const [single, setSindle] = useState(0);
+    // console.log(single.featured_image);
+
+    // call dispatch
+    const dispatch = useDispatch();
+    const { slug } = useParams();
 
     // preview image dynamic
     const [previewImg, setPreviewImg] = useState(Shoe1);
@@ -50,7 +64,44 @@ const SingleShop = () => {
 
     useEffect(() => {
         window.scroll(0,0);
+
+        try {
+    
+            dispatch(productRequest());
+            axios.get(`http://localhost:5050/api/v1/product/product-search-slug/${ slug }`)
+            .then(res => {
+                dispatch({
+                    type: SLUG_PRODUCT
+                });;
+                setSindle(res.data);
+                setPreviewImg(`http://localhost:5050/images/products/${res.data.featured_image}`)
+                console.log(res.data);
+            })
+            .catch(error => {
+                dispatch(productFail(error.message));
+            });
+            
+        } catch (error) {
+            dispatch(productFail(error.message));
+        }
+
     }, []);
+
+    let rating = '';
+    for(let i=0; i<5; i++){
+        if(i<single.rating){
+            rating += '<i className="fa fa-star colored"></i>'
+        }else {
+            rating += '<i className="fa fa-star"></i>'
+        }
+    }
+
+    let price = '';
+    if(single.sale_price){
+        price = <span className='text-2xl font-bold my-1 block'>$ <small className='line-through text-red-500'>{ single.regular_price }</small> { single.sale_price }</span>
+    }else {
+        <span className='text-2xl font-bold my-1 block'>$ { single.regular_price }</span>
+    }
 
   return (
     <>
@@ -62,10 +113,11 @@ const SingleShop = () => {
                         <div className="row">
                             <div className="col-12 col-md-6 col-lg-6 flex gap-6">
                                 <div className="left__left">
-                                     <img src={ Shoe2 } alt="" className='small__img' onClick={ handleSmallImage } />
-                                     <img src={ Shoe3 } alt="" className='small__img' onClick={ handleSmallImage } />
-                                     <img src={ Shoe4 } alt="" className='small__img' onClick={ handleSmallImage } />
-                                     <img src={ Shoe5 } alt="" className='small__img' onClick={ handleSmallImage } />
+                                    {
+                                        single && single.gallery_image.map((sml, k) => 
+                                            <img key={k} src={ `http://localhost:5050/images/products/${sml}` } alt="" className='small__img' onClick={ handleSmallImage } />
+                                        )
+                                    }
                                 </div>
                                 <div className="left__right">
                                     {/* <img src={ Shoe1 } alt="" className='big__img' id='big__img' /> */}
@@ -77,41 +129,53 @@ const SingleShop = () => {
                             <div className="col-12 col-md-6 col-lg-6">
                                 <div className="details">
                                     <p className='text-bgColor'>Shoes</p>
-                                    <h2 className='product_name text-lg font-semibold'>Thar-01 Grey Sneakers,Sports,Training,Gym,Walking,Stylish For Men</h2>
+                                    <h2 className='product_name text-lg font-semibold'>{ single.name }</h2>
                                     <span className='product_rating text-sm'>
                                         <span className='product_rating block mt-1'>
-                                            <i className="fa fa-star colored"></i>
+                                            {/* <i className="fa fa-star colored"></i>
                                             <i className="fa fa-star colored"></i>
                                             <i className="fa fa-star colored"></i>
                                             <i className="fa fa-star"></i>
-                                            <i className="fa fa-star"></i>
+                                            <i className="fa fa-star"></i> */}
+                                            { parse(rating) }
                                         </span>
-                                        <span className='text-2xl font-bold my-1 block'>$ <small className='line-through text-red-500'>220</small> 150</span>
+                                        {/* <span className='text-2xl font-bold my-1 block'>$ <small className='line-through text-red-500'>220</small> 150</span> */}
+                                        { price }
                                     </span>
                                     <hr className='text-gray-400' />
                                     <div className="short__description mt-3">
                                         <h3 className='text-base font-semibold'>Short description</h3>
-                                        <p className='font-extralight'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, sequi placeat dicta alias exercitationem harum!</p>
+                                        <p className='font-extralight'>{ single.short_desc }</p>
                                     </div>
                                     <div className="all__colors my-3">
                                         <h4 className='text-base font-normal opacity-70'>Available colors</h4>
                                         <ul>
-                                            <li onClick={ handleColorSelect }>Black</li>
+                                            {/* <li onClick={ handleColorSelect }>Black</li>
                                             <li onClick={ handleColorSelect }>Blue</li>
                                             <li onClick={ handleColorSelect }>Bronze</li>
                                             <li onClick={ handleColorSelect }>Brown</li>
-                                            <li onClick={ handleColorSelect }>Green</li>
+                                            <li onClick={ handleColorSelect }>Green</li> */}
+                                            {
+                                                single.colors && single.colors.map((color, c) => (
+                                                    <li key={c} onClick={ handleColorSelect }>{ color.name }</li>
+                                                ))
+                                            }
                                         </ul>
                                     </div>
                                     <div className="all__sizes my-3">
                                         <h4 className='text-base font-normal opacity-70'>Available sizes</h4>
                                         <ul>
-                                            <li onClick={ handleSizeSelect }>5</li>
+                                            {/* <li onClick={ handleSizeSelect }>5</li>
                                             <li onClick={ handleSizeSelect }>4</li>
                                             <li onClick={ handleSizeSelect }>6</li>
                                             <li onClick={ handleSizeSelect }>7</li>
                                             <li onClick={ handleSizeSelect }>8</li>
-                                            <li onClick={ handleSizeSelect }>9</li>
+                                            <li onClick={ handleSizeSelect }>9</li> */}
+                                            {
+                                                single.sizes && single.sizes.map((size, s) => (
+                                                    <li key={s} onClick={ handleSizeSelect }>{ size.name }</li>
+                                                ))
+                                            }
                                         </ul>
                                     </div>
                                     <div className="cta_group_d">
@@ -126,7 +190,7 @@ const SingleShop = () => {
                 <div className="card__ my-5 bg-white p-3 rounded-md">
                     <div className="long__description">
                         <h2 className='text-xl font-semibold text-bgColor'>Description</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat et voluptatem modi expedita enim voluptate praesentium error earum nulla similique, laborum doloremque. Quo ea ex quas ratione atque doloremque inventore molestiae fugiat nam ipsa aliquam quidem mollitia architecto repudiandae iste dignissimos vitae, quaerat fugit praesentium suscipit incidunt assumenda voluptate voluptatum! Eaque nihil, ullam optio officia eveniet quibusdam nemo assumenda asperiores id debitis voluptatum illum laboriosam! Quae assumenda asperiores, iure impedit consequuntur dolorem, porro numquam libero sed eaque aut? Quos alias consequuntur odit tenetur recusandae nostrum atque consectetur earum! A architecto obcaecati quae itaque officia voluptatum laudantium dignissimos, temporibus voluptatibus suscipit.</p>
+                        <p>{ single && parse(single.long_desc) }</p>
                     </div>
                 </div>
                 <div className="related__product">

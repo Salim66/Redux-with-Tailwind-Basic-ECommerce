@@ -148,8 +148,16 @@ export const deleteProduct = async (req, res, next) => {
 
         const product = await Product.findByIdAndDelete(id);
         
+        // unlink featured image
         if(product._featured_image){
             fs.unlinkSync(path.join(__dirname, `api/public/images/products/${product.featured_image}`));
+        }
+
+        // unlink gallery image
+        if(product.gallery_image){
+            product.gallery_image.forEach(item => {
+                fs.unlinkSync(path.join(__dirname, `api/public/images/products/${item}`));
+            })
         }
         
         if(product){
@@ -194,6 +202,56 @@ export const deleteProduct = async (req, res, next) => {
 
     } catch (error) {
         next(createError(error));
+    }
+
+}
+
+/**
+ * @access private
+ * @route api/product/popular
+ * @method GET
+ */
+ export const getAllPopularProduct = async (req, res, next) => {
+    
+    try {
+        
+        const products = await Product.find().where('popular_product', true).sort({ _id: 'desc'}).limit(5);
+
+        if(products){
+            res.status(200).json(products);
+        }else {
+            next(createError(401, "Something want wrong!"))
+        }
+        
+
+    } catch (error) {
+        next(error);
+    }
+
+}
+
+/**
+ * @access private
+ * @route api/product/product-search-slug/slug
+ * @method GET
+ */
+ export const getProductBySlug = async (req, res, next) => {
+    
+    try {
+
+        let { slug } = req.params;
+        
+        const product = await Product.findOne({ slug: slug }).populate(['colors', 'sizes']);
+
+        if(product){
+            res.status(200).json(product);
+        }else {
+            next(createError(401, "Something want wrong!"))
+        }
+        
+
+    } catch (error) {
+        next(error);
     }
 
 }

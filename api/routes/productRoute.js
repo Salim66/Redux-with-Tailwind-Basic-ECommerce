@@ -1,7 +1,7 @@
 import express from "express"
 import multer from 'multer';
 import path, { resolve } from 'path';
-import { createProduct, deleteProduct, getAllProduct, getSingleProduct, updateProduct, updateProductStatus } from "../controllers/productController.js";
+import { createProduct, deleteProduct, getAllPopularProduct, getAllProduct, getProductBySlug, getSingleProduct, updateProduct, updateProductStatus } from "../controllers/productController.js";
 
 
 // init router
@@ -34,6 +34,8 @@ const productMulter = multer({
 
 // route
 router.route('/').get(getAllProduct).post(productMulter, createProduct);
+router.route('/popular').get(getAllPopularProduct);
+router.route('/product-search-slug/:slug').get(getProductBySlug);
 router.route('/:value/:id').patch(updateProductStatus);
 router.route('/:id').get(getSingleProduct).put(productMulter, updateProduct).delete(deleteProduct);
 

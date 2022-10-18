@@ -5,6 +5,7 @@ const initialProduct = {
     error: null,
     single_product: {},
     edit_product: {},
+    popular_products: [],
 }
 
 // export default

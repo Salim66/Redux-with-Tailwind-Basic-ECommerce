@@ -17,7 +17,7 @@ import { getAllColor } from './redux/color/action';
 import { getAllTag } from './redux/tag/action';
 import { getAllBrand } from './redux/brand/action';
 import { getAllCategory } from './redux/category/action';
-import { getAllProduct } from './redux/product/action';
+import { getAllPopularProduct, getAllProduct } from './redux/product/action';
 
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
     dispatch(getAllBrand());
     dispatch(getAllCategory());
     dispatch(getAllProduct());
+    dispatch(getAllPopularProduct());
   },[]);
 
   return (
@@ -38,7 +39,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <Home /> } />
         <Route path="/shop" element={ <ShopPage /> } />
-        <Route path="/single-shop" element={ <SingleShop /> } />
+        <Route path="/single-shop/:slug" element={ <SingleShop /> } />
 
         // Admin Route
         <Route path="/dashboard" element={ <Dashboard /> } />
