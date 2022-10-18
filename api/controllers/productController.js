@@ -232,6 +232,30 @@ export const deleteProduct = async (req, res, next) => {
 
 /**
  * @access private
+ * @route api/product/new
+ * @method GET
+ */
+ export const getAllNewProduct = async (req, res, next) => {
+    
+    try {
+        
+        const products = await Product.find().where('popular_product', false).sort({ _id: 'desc'}).limit(9);
+
+        if(products){
+            res.status(200).json(products);
+        }else {
+            next(createError(401, "Something want wrong!"))
+        }
+        
+
+    } catch (error) {
+        next(error);
+    }
+
+}
+
+/**
+ * @access private
  * @route api/product/product-search-slug/slug
  * @method GET
  */

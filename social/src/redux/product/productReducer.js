@@ -1,4 +1,4 @@
-import { DELETE_PRODUCT, EDIT_PRODUCT, POPULAR_PRODUCT, PRODUCT_FAIL, PRODUCT_REQUEST, PRODUCT_SUCCESS, SINGLE_PRODUCT, SLUG_PRODUCT } from "./actionType"
+import { DELETE_PRODUCT, EDIT_PRODUCT, NEW_PRODUCT, POPULAR_PRODUCT, PRODUCT_FAIL, PRODUCT_REQUEST, PRODUCT_SUCCESS, SINGLE_PRODUCT, SLUG_PRODUCT } from "./actionType"
 import initialProduct from "./initailProduct"
 
 
@@ -52,6 +52,13 @@ const productReducer = ( state = initialProduct, { type, payload } ) => {
             return {
                 ...state,
                 popular_products: payload,
+                skeleton: false
+            }
+
+        case NEW_PRODUCT:
+            return {
+                ...state,
+                new_products: payload,
                 skeleton: false
             }
     

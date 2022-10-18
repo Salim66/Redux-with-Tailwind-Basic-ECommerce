@@ -17,7 +17,7 @@ import { getAllColor } from './redux/color/action';
 import { getAllTag } from './redux/tag/action';
 import { getAllBrand } from './redux/brand/action';
 import { getAllCategory } from './redux/category/action';
-import { getAllPopularProduct, getAllProduct } from './redux/product/action';
+import { getAllNewProduct, getAllPopularProduct, getAllProduct } from './redux/product/action';
 
 
 function App() {
@@ -32,6 +32,7 @@ function App() {
     dispatch(getAllCategory());
     dispatch(getAllProduct());
     dispatch(getAllPopularProduct());
+    dispatch(getAllNewProduct());
   },[]);
 
   return (

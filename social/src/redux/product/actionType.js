@@ -6,3 +6,4 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const POPULAR_PRODUCT = "POPULAR_PRODUCT";
 export const SLUG_PRODUCT = "SLUG_PRODUCT";
+export const NEW_PRODUCT = "NEW_PRODUCT";
